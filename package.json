@@ -1,0 +1,30 @@
+{
+  "name": "json-escaping",
+  "version": "1.0.0",
+  "description": "Fast JSON string escaping",
+  "main": "index.js",
+  "scripts": {
+    "benchmark": "node ./benchmark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BridgeAR/fast-json-escape.git"
+  },
+  "keywords": [
+    "JSON",
+    "stringify",
+    "escape",
+    "string",
+    "ascii"
+  ],
+  "author": "Ruben Bridgewater (ruben@bridgewater.de)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BridgeAR/fast-json-escape/issues"
+  },
+  "homepage": "https://github.com/BridgeAR/fast-json-escape#readme",
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "standard": "^11.0.1"
+  }
+}
