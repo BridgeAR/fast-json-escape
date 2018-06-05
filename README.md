@@ -34,4 +34,4 @@ this longer minimal escape x 2,063,352 ops/sec ±1.75% (91 runs sampled)
 The benchmarks ran on Node.js 10.2.1 using a Lenovo T450s with an i7-5600u.
 The "longer" benchmarks are worst case benchmarks.
 
-[`JSON.stringify()`][https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify]
+[`JSON.stringify()`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
