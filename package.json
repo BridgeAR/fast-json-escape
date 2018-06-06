@@ -4,7 +4,8 @@
   "description": "Fast JSON string escaping",
   "main": "index.js",
   "scripts": {
-    "benchmark": "node ./benchmark"
+    "benchmark": "node ./benchmark",
+    "test": "node ./test.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/BridgeAR/fast-json-escape#readme",
   "devDependencies": {
     "benchmark": "^2.1.4",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "tap": "^12.0.1"
   }
 }

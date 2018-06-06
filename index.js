@@ -44,7 +44,7 @@ function strEscape (str) {
   } else if (last !== i) {
     result += str.slice(last)
   }
-  return result
+  return `"${result}"`
 }
 
 function strBigEscape (str) {
@@ -58,7 +58,7 @@ function strBigEscape (str) {
       } else {
         result += `${str.slice(last, i)}${meta[point]}`
       }
-      if (i < 40) return `${result}${stringify(str.slice(i))}`
+      if (i < 40) return stringify(str)
       last = i + 1
     }
   }
@@ -67,7 +67,7 @@ function strBigEscape (str) {
   } else if (last !== i) {
     result += str.slice(last)
   }
-  return result
+  return `"${result}"`
 }
 
 module.exports = strEscape
