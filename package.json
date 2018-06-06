@@ -1,6 +1,6 @@
 {
   "name": "json-escaping",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fast JSON string escaping",
   "main": "index.js",
   "scripts": {
