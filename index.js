@@ -1,6 +1,9 @@
 'use strict'
 
-const { stringify } = JSON
+// eslint-disable-next-line
+const strEscapeSequencesRegExp = /[\u0000-\u001f\u0022\u005c\ud800-\udfff]|[\ud800-\udbff](?![\udc00-\udfff])|(?:[^\ud800-\udbff]|^)[\udc00-\udfff]/
+// eslint-disable-next-line
+const strEscapeSequencesReplacer = new RegExp(strEscapeSequencesRegExp, 'g')
 
 // Escaped special characters. Use empty strings to fill up unused entries.
 const meta = [
@@ -19,54 +22,47 @@ const meta = [
   '', '', '', '', '', '', '', '\\\\'
 ]
 
-// Escape control characters, double quotes and the backslash.
-function strEscape (str) {
-  if (str.length > 50) {
-    if (str.length > 100)
-      return stringify(str)
-    return strBigEscape(str)
+function escapeFn (str) {
+  if (str.length === 2) {
+    const charCode = str.charCodeAt(1)
+    return `${str[0]}\\u${charCode.toString(16)}`
   }
-  let result = ''
-  let last = 0
-  for (var i = 0; i < str.length; i++) {
-    const point = str.charCodeAt(i)
-    if (point === 34 || point === 92 || point < 32) {
-      if (last === i) {
-        result += meta[point]
-      } else {
-        result += `${str.slice(last, i)}${meta[point]}`
-      }
-      last = i + 1
-    }
-  }
-  if (last === 0) {
-    result = str
-  } else if (last !== i) {
-    result += str.slice(last)
-  }
-  return `"${result}"`
+  const charCode = str.charCodeAt(0)
+  return meta.length > charCode
+    ? meta[charCode]
+    : `\\u${charCode.toString(16)}`
 }
 
-function strBigEscape (str) {
+// Escape C0 control characters, double quotes, the backslash and every code
+// unit with a numeric value in the inclusive range 0xD800 to 0xDFFF.
+function strEscape (str) {
+  // Some magic numbers that worked out fine while benchmarking with v8 8.0
+  if (str.length < 5000 && !strEscapeSequencesRegExp.test(str)) {
+    return `"${str}"`
+  }
+  if (str.length > 100) {
+    return `"${str.replace(strEscapeSequencesReplacer, escapeFn)}"`
+  }
   let result = ''
   let last = 0
-  for (var i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i++) {
     const point = str.charCodeAt(i)
     if (point === 34 || point === 92 || point < 32) {
-      if (last === i) {
-        result += meta[point]
-      } else {
-        result += `${str.slice(last, i)}${meta[point]}`
+      result += `${str.slice(last, i)}${meta[point]}`
+      last = i + 1
+    } else if (point >= 0xd800 && point <= 0xdfff) {
+      if (point <= 0xdbff && i + 1 < str.length) {
+        const nextPoint = str.charCodeAt(i + 1)
+        if (nextPoint >= 0xdc00 && nextPoint <= 0xdfff) {
+          i++
+          continue
+        }
       }
-      if (i < 40) return stringify(str)
+      result += `${str.slice(last, i)}\\u${point.toString(16)}`
       last = i + 1
     }
   }
-  if (last === 0) {
-    result = str
-  } else if (last !== i) {
-    result += str.slice(last)
-  }
+  result += str.slice(last)
   return `"${result}"`
 }
 
