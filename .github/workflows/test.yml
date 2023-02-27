@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        node_version:
+          - 10
+          - 16
+          - 18
+          - latest
+    name: Running tests with Node ${{ matrix.node_version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node_version }}
+    - run: |
+        npm install
+        npm run test
