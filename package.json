@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "benchmark": "node ./benchmark",
-    "test": "node ./test.js"
+    "test": "node ./test.js",
+    "lint": "standard --fix"
+  },
+  "engines": {
+    "node": ">=12"
   },
   "repository": {
     "type": "git",
