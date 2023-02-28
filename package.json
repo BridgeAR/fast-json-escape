@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "benchmark": "node ./benchmark",
-    "test": "node ./test.js",
+    "test": "npm run lint && node ./test.js",
     "lint": "standard --fix"
   },
   "engines": {
