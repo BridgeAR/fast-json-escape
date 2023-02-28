@@ -8,9 +8,9 @@ const shortNonEscapeStr = 'huaishdPUHAUShduiasuZ9172387AUihausihdu'
 const shortFullEscapeStr1 = '\n\r\f\t\b"\\jiOJIjaiushd\n\r\f\t\b"\\KJoa'
 const shortFullEscapeStr2 = 'jiOJIjaiushd\n\r\f\t\b"\\KJoa\n\r\f\t\b"\\'
 const shortMinimalEscapeStr = 'nsiojIOJnu"hu9nasd8"\\jiOJIjaiushd"\\KJoa'
-const longerNonEscapeStr = 'huaishdPUHAUShduiasu6d7nhqmpshejy0fZ9172387AUihausih6d83jb9y0qajusidhnjasnj'
-const longerFullEscapeStr = '\n\r\f\t\b"\\jiOJIjaiushd\n\r\f6d9gm\t\b"\\Kiusu8u\n\r\f8ajgshd\n\r\f7\t\b"\\KJoa'
-const longerMinimalEscapeStr = 'nsiojIOJnu"hu9na7d9\\9qjgml1\\sd8"\\jiOJIjaius"hiushd"\\Kd"\\KJ'
+const longerNonEscapeStr = 'huaishdPUHAUShduiasu6d7nhqmpshejy0fZ9172387AUihausih6d83jb9y0qajusidhnjasnj'.repeat(40)
+const longerFullEscapeStr = '\n\r\f\t\b"\\jiOJIjaiushd\n\r\f6d9gm\t\b"\\Kiusu8u\n\r\f8ajgshd\n\r\f7\t\b"\\KJoa'.repeat(40)
+const longerMinimalEscapeStr = 'nsiojIOJnu"hu9na7d9\\9qjgml1\\sd8"\\jiOJIjaius"hiushd"\\Kd"\\KJ'.repeat(40)
 
 suite.add('JSON short non escaped', function () {
   JSON.stringify(shortNonEscapeStr)
