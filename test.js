@@ -18,3 +18,13 @@ test('should escape surrogate pair', (t) => {
 
   t.equal(escape(str), JSON.stringify(str))
 })
+
+test('fail for invalid types', (t) => {
+  t.plan(1)
+
+  t.throws(() => {
+    escape(5)
+  }, {
+    message: 'Expected input to be of type string, received type number (5)'
+  })
+})
